@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginService } from '../app/services/login.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,

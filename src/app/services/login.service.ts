@@ -1,6 +1,7 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +14,10 @@ export class LoginService {
         JSON.stringify(credenciais))
         .pipe(
           map(response => {
-             console.log(response.status);
-             let result = response._body;
-            if ( result ) {
-              localStorage.setItem('token', result);
+      //       console.log(response._body);
+        //     let result = response._body;
+            if ( response._body ) {
+              localStorage.setItem('token', response._body);
               return true;
             } else {
               return false;
@@ -27,8 +28,18 @@ export class LoginService {
   }
 
   logout() {
+    localStorage.removeItem('token');
   }
 
   isLoggedIn() {
+      let helper = new JwtHelperService;
+      let token = localStorage.getItem('token');
+      let decToken = helper.decodeToken(token);
+      
+      if ( helper.decodeToken(token) ) {
+        console.log(decToken.iss);
+        return true;
+      }
+       return false;
   }
 }
