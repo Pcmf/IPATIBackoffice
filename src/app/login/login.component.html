@@ -6,7 +6,7 @@
     <div class="panel-body">
       <form class="form-signin" #f="ngForm" (ngSubmit)="signin(f.value)">
         <div class="form-group">
-          <div class="alert alert-danger"  *ngIf="false">
+          <div class="alert alert-danger"  *ngIf="invalidLogin">
             Nome de utilizador ou password errados!
           </div>
           <label class="sr-only">Utilizador</label>

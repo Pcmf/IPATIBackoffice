@@ -9,13 +9,21 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent {
   invalidLogin: boolean;
-  constructor() {}
- //   private router: Router,
-  //  private loginService: LoginService) { }
+  constructor(
+   private router: Router,
+   private loginService: LoginService) { }
 
 
   signin(credenciais) {
       console.log(JSON.stringify(credenciais));
+      this.loginService.login(credenciais)
+      .subscribe( result => {
+          if (result) {
+            this.router.navigate(['/']);
+          } else {
+            this.invalidLogin = true;
+          }
+        });
   }
 
 }
