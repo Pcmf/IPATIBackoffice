@@ -9,13 +9,16 @@ import { HomeComponent } from './home/home.component';
 import { LoginService } from '../app/services/login.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { ChangepassComponent } from './changepass/changepass.component';
+import { NavbarService } from './services/navbar.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ChangepassComponent
   ],
   imports: [
     BrowserModule,
@@ -24,11 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'login' , component: LoginComponent}
+      {path: 'login' , component: LoginComponent},
+      {path: 'change' , component: ChangepassComponent}
     ])
   ],
   providers: [
-    LoginService
+    LoginService,
+    NavbarService
   ],
   bootstrap: [AppComponent]
 })
