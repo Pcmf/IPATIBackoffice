@@ -10,10 +10,20 @@ import { NavbarService } from '../services/navbar.service';
 })
 export class NavbarComponent  {
   private loginName: any;
+  private helper = new JwtHelperService;
+
   constructor(private loginService: LoginService, private navService: NavbarService) {
-    this.navService.navstate$.subscribe( (state) => this.loginName = state.nome );
+
+    if (localStorage.getItem('token') !== null) {
+      this.loginName = this.helper.decodeToken(localStorage.getItem('token')).nome;
+    } else {
+      this.navService.navstate$.subscribe((state: any) => this.loginName = state.nome);
+    }
+
+    // this.navService.navstate$.subscribe( (state: any) => this.loginName = state.nome );
   }
-   logout () {
+
+  logout () {
      localStorage.removeItem('token');
    }
 

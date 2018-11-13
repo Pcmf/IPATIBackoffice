@@ -1,0 +1,41 @@
+<div class="container">
+<p>&nbsp;</p>
+ <!--   <div class="card">
+    <div class="card-header">
+        <h3 class="text-primary">Lista dos Serviços</h3>
+    </div>
+    <div class="card-body" *ngFor="let s of servicos">
+      <h4 class="card-title">{{s.NOME}}</h4>
+    </div>
+  </div>  -->
+
+  <div class="list-group">
+      <a href="" class="list-group-item list-group-item-action active">
+        <h4>Lista de Serviços</h4>
+      </a>
+      <div  *ngFor="let s of servicos">
+      <a href="" class="list-group-item list-group-item-action" data-toggle="collapse" href="#collapseExample{{s.COD_SERVICO}}" 
+            role="button" aria-expanded="false" aria-controls="collapseExample" >{{s.NOME}}</a>
+      
+      <div class="collapse" id="collapseExample{{s.COD_SERVICO}}">
+        <div class="card card-body">
+          <form #f="ngForm" (ngSubmit)="saveServico(f.value)">
+            <div class="form-group">
+                <input type="hidden" #cod_servico name="cod_servico" [ngModel]="s.COD_SERVICO"/>
+                <label>Nome</label>
+                <input type='text' class="form-control" #nome name="nome"  [(ngModel)]="s.NOME" />
+                <label>Link do Video</label>
+                <input type='text' class="form-control" #video name="video" [(ngModel)]="s.VIDEO"/>
+                <label>Link do PDF</label>
+                <input type='text' class="form-control" #pdf name="pdf"  [(ngModel)]="s.PDF"/>
+            </div>
+            <button class="btn btn-success" type="submit">Gravar</button> 
+            <button class="btn btn-danger" (click)=deleteServico(s.COD_SERVICO)>Remover</button> 
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="text-right">
+  <button class="btn btn-info" (click)=newServico()>Inserir novo serviço</button>
+</div>

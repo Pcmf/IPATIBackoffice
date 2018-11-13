@@ -1,0 +1,62 @@
+<p>&nbsp;</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+        <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active">
+              MANUAIS
+            </button>
+              <button *ngFor="let m of manuais" (click)="showTitulos(m)" type="button" class="list-group-item list-group-item-action">
+                <button class="btn btn-sm fa-pull-right"  (click)="deleteManual(m)" title="Remover Manual selecionado e respectivos Titulos">
+                  <i class="fa fa-times" aria-hidden="true"> </i> </button>
+                {{m.NOME}}
+              </button>
+              <div *ngIf="showNewManual">
+                <form #nm="ngForm" (ngSubmit)="guardarNovoManual(nm.value)">
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="nome" #nome ngModel placeholder="Novo manual"/>
+                    <button class="btn btn-success" type="submit">Guardar</button>
+                    <button class="btn btn-warning" (click)="cancelar()">Cancelar</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <div class="text-right" *ngIf="!showNewManual">
+              <button class="btn btn-info" (click)="newManual()">Inserir novo Manual</button>
+          </div>          
+    </div>
+
+    <div class="col-md-9">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active bg-info">
+            <h4>Titulos: {{manual}}</h4>
+          </a>
+          <div *ngFor="let t of titulos">
+            <!--Botão do titulo-->
+            <a href="" class="list-group-item list-group-item-action" data-toggle="collapse" href="#collapseExample{{t.SEQ}}"
+              role="button" aria-expanded="false" aria-controls="collapseExample" (click)="loadDescricao(t)">{{t.NOME}}</a>
+            <!--Painel do detalhe-->
+            <div class="collapse" id="collapseExample{{t.SEQ}}">
+              <div class="card card-body">
+                <form #f="ngForm" (ngSubmit)="saveTitulo(f.value)">
+                  <div class="form-group">
+                    <input type="hidden" #seq name="seq" [ngModel]="t.SEQ" />
+                    <input type="hidden" #seq name="cod_manual" [ngModel]="t.COD_MANUAL" />
+                    <label>Nome</label>
+                    <input type='text' class="form-control" #nome name="nome" [(ngModel)]="t.NOME" />
+                    <label>Descrição</label>
+                    <textarea class="form-control" rows="20" [ngModel]="descr" name="descricao"></textarea>
+                  </div>
+                  <button class="btn btn-success" type="submit">Gravar</button>
+                  <button class="btn btn-danger" (click)=deleteTitulo(t)>Remover</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-right" *ngIf="manual">
+          <button class="btn btn-info" (click)=newTitulo()>Inserir novo titulo</button>
+        </div>
+    </div>
+  </div>
+</div>

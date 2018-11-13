@@ -15,7 +15,7 @@ export class LoginService {
     return this.http.post('http://localhost/ipatimupRest/auth',
         JSON.stringify(credenciais))
         .pipe(
-          map(response => {
+          map((response: any) => {
             if ( response._body ) {
               localStorage.setItem('token', response._body);
               //
@@ -50,7 +50,7 @@ export class LoginService {
             if ( response._body ) {
               localStorage.setItem('token', response._body);
               //
-              this.navbarService.setNavState(this.helper.decodeToken(response._body).nome);
+              this.navbarService.setNavState(this.helper.decodeToken(response._body));
               return true;
             } else {
               return false;

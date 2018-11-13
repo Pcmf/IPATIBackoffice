@@ -24,7 +24,7 @@ export class LoginComponent {
       this.loginService.login(credenciais)
         .subscribe( result => {
             if (result) {
-              this.navbarService.nome = this.state.nome;
+              this.navbarService = this.state;
               if (!this.state.change) {
                 this.router.navigate(['/']);
               } else {

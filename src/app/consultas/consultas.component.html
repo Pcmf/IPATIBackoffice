@@ -1,0 +1,31 @@
+<div class="container">
+  <p>&nbsp;</p>
+
+  <div class="list-group">
+    <a href="" class="list-group-item list-group-item-action active">
+      <h4>Tipos de Consulta</h4>
+    </a>
+    <div *ngFor="let t of consultas">
+      <a href="" class="list-group-item list-group-item-action" data-toggle="collapse" href="#collapseExample{{t.COD_TPCONSULTA}}"
+        role="button" aria-expanded="false" aria-controls="collapseExample">{{t.NOME}}</a>
+
+      <div class="collapse" id="collapseExample{{t.COD_TPCONSULTA}}">
+        <div class="card card-body">
+          <form #f="ngForm" (ngSubmit)="saveTPC(f.value)">
+            <div class="form-group">
+              <input type="hidden" #cod_tpconsulta name="cod_tpconsulta" [ngModel]="t.COD_TPCONSULTA" />
+              <label>Nome</label>
+              <input type='text' class="form-control" #nome name="nome" [(ngModel)]="t.NOME" />
+            </div>
+            <button class="btn btn-success" type="submit">Gravar</button>
+            <button class="btn btn-danger" (click)=deleteTPC(t.COD_TPCONSULTA)>Remover</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-right">
+    <button class="btn btn-info" (click)=newTPC()>Inserir novo tipo de consulta</button>
+  </div>
+
+</div>
