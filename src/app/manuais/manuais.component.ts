@@ -14,6 +14,8 @@ export class ManuaisComponent {
   private manual: string;
   private cod_manual: number;
   private descr: string;
+  private newNomeManual: string;
+  private showNewManual = false;
 
   constructor(private crudService: CrudService) {
     this.getData();
