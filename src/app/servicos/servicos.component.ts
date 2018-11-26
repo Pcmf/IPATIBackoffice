@@ -16,18 +16,21 @@ export class ServicosComponent {
   }
 
   saveServico (servico) {
-    console.log(servico);
     if  (servico.cod_servico === 0) {
-      this.crudService.create('servicos', servico);
+      this.crudService.create('servicos', servico).subscribe( resp => {
+        this.getData();
+      });
     } else {
-      this.crudService.saveChanges('servicos/' + servico.cod_servico, servico);
+      this.crudService.saveChanges('servicos/' + servico.cod_servico, servico).subscribe( resp => {
+        this.getData();
+      });
     }
-    this.getData();
   }
 
   deleteServico (servicoId) {
-    this.crudService.delete('servicos/' + servicoId);
-    this.getData();
+    this.crudService.delete('servicos/' + servicoId).subscribe( resp => {
+      this.getData();
+    });
   }
 
   newServico () {
@@ -39,6 +42,6 @@ export class ServicosComponent {
         resp => {
           this.servicos = resp.json();
         }
-      ), delay(1000);
+      );
   }
 }

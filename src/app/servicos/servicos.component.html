@@ -1,13 +1,5 @@
 <div class="container">
 <p>&nbsp;</p>
- <!--   <div class="card">
-    <div class="card-header">
-        <h3 class="text-primary">Lista dos Serviços</h3>
-    </div>
-    <div class="card-body" *ngFor="let s of servicos">
-      <h4 class="card-title">{{s.NOME}}</h4>
-    </div>
-  </div>  -->
 
   <div class="list-group">
       <a href="" class="list-group-item list-group-item-action active">
@@ -15,7 +7,10 @@
       </a>
       <div  *ngFor="let s of servicos">
       <a href="" class="list-group-item list-group-item-action" data-toggle="collapse" href="#collapseExample{{s.COD_SERVICO}}" 
-            role="button" aria-expanded="false" aria-controls="collapseExample" >{{s.NOME}}</a>
+            role="button" aria-expanded="false" aria-controls="collapseExample" >
+            {{s.NOME}}
+            <i class="fa fa-chevron-dow"></i>
+      </a>
       
       <div class="collapse" id="collapseExample{{s.COD_SERVICO}}">
         <div class="card card-body">

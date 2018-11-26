@@ -22,22 +22,25 @@ export class ConsultasComponent {
   }
 
   newTPC ( obj ) {
-    this.consultas.push({'COD_TPCONSULTA': 0, 'NOME': '"novo tipo"'});
+    this.consultas.push({'COD_TPCONSULTA': 0, 'NOME': 'Novo tipo'});
   }
 
   saveTPC ( obj ) {
-    console.log(obj );
     if (obj.cod_tpconsulta !== 0) {
-      this.crudService.saveChanges('tpconsulta/' + obj.cod_tpconsulta, obj);
+      this.crudService.saveChanges('tpconsulta/' + obj.cod_tpconsulta, obj).subscribe( resp => {
+        this.getData();
+      });
     } else {
-      this.crudService.create('tpconsulta', obj);
+      this.crudService.create('tpconsulta', obj).subscribe( resp => {
+        this.getData();
+      });
     }
-    this.getData(), delay(500);
   }
 
   deleteTPC ( cod_tpconsulta) {
-    this.crudService.delete('tpconsulta/' + cod_tpconsulta);
-    this.getData(), delay(500);
+    this.crudService.delete('tpconsulta/' + cod_tpconsulta).subscribe( resp => {
+      this.getData();
+    });
   }
 
 

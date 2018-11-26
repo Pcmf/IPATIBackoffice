@@ -17,7 +17,7 @@ export class LoginService {
         .pipe(
           map((response: any) => {
             if ( response._body ) {
-              localStorage.setItem('token', response._body);
+              sessionStorage.setItem('token', response._body);
               //
               this.navbarService.setNavState(this.helper.decodeToken(response._body));
               return true;
@@ -29,12 +29,16 @@ export class LoginService {
         );
   }
 
+  getUserData () {
+    return this.navbarService.navstate$;
+  }
+
   logout() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   isLoggedIn() {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       if ( token && this.helper.isTokenExpired(token)) {
         return true;
       } else {
@@ -48,7 +52,7 @@ export class LoginService {
         .pipe(
           map(response => {
             if ( response._body ) {
-              localStorage.setItem('token', response._body);
+              sessionStorage.setItem('token', response._body);
               //
               this.navbarService.setNavState(this.helper.decodeToken(response._body));
               return true;

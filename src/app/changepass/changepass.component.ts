@@ -10,8 +10,15 @@ import { Router } from '@angular/router';
 export class ChangepassComponent implements OnInit {
   private invalid2Pass = false;
   private erro = false;
+  private u = {};
   private newData: any;
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {
+    this.loginService.getUserData().subscribe(resp => {
+      this.u = resp;
+      console.log( this.u );
+    });
+
+  }
 
   ngOnInit() {
   }

@@ -25,16 +25,20 @@ export class UtilComponent {
   saveTPC ( obj ) {
     console.log(obj );
     if (obj.cod_tipo_util !== 0) {
-      this.crudService.saveChanges('tputil/' + obj.cod_tipo_util, obj);
+      this.crudService.saveChanges('tputil/' + obj.cod_tipo_util, obj).subscribe( resp => {
+        this.getData();
+      });
     } else {
-      this.crudService.create('tputil', obj);
+      this.crudService.create('tputil', obj).subscribe( resp => {
+        this.getData();
+      });
     }
-    this.getData();
   }
 
   deleteTPC ( cod_tipo_util) {
-    this.crudService.delete('tputil/' + cod_tipo_util);
-    this.getData();
+    this.crudService.delete('tputil/' + cod_tipo_util).subscribe( resp => {
+      this.getData();
+    });
   }
 
 }

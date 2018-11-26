@@ -11,7 +11,11 @@
           </div>
           <div class="alert alert-danger"  *ngIf="erro">
             Houve um erro na base de dados!
-          </div>          
+          </div>
+          <label class="">Nome</label>
+          <input type="text" class="form-control" #nome name="nome" [(ngModel)]="u.nome"/>            
+          <label class="">Utilizador</label>
+          <input type="text" class="form-control" #username name="username" [(ngModel)]="u.username"/>          
           <label class="sr-only">Nova password</label>
           <input type="text" class="form-control" #pass1 name="pass1" ngModel placeholder="Nova password"/>
           <label class="sr-only">Confirmar password</label>

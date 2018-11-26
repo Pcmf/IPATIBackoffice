@@ -19,7 +19,6 @@ export class LabComponent {
     * Guardar alterações
     */
    saveChanges (lab) {
-     console.log(lab);
       this.crudService.saveChanges('lab', lab.value);
    }
 }

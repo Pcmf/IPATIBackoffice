@@ -47,7 +47,8 @@ import { AuthGuardService } from './services/auth-guard.service';
       {path: 'sobre' , component: SobreComponent, canActivate: [AuthGuardService]},
       {path: 'util' , component: UtilComponent, canActivate: [AuthGuardService]},
       {path: 'cons' , component: ConsultasComponent, canActivate: [AuthGuardService]},
-      {path: 'change' , component: ChangepassComponent}
+      {path: 'change' , component: ChangepassComponent, canActivate: [AuthGuardService]},
+      {path: '**', component: HomeComponent}
     ])
   ],
   providers: [

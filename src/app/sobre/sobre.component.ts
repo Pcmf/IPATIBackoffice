@@ -8,14 +8,15 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./sobre.component.css']
 })
 export class SobreComponent {
-  private sobres: any[];
+  private sobres: any[] = [];
 
   constructor(private crudService: CrudService) {
+    this.sobres[0] = '';
+    this.sobres[1] = '';
     this.getData();
   }
 
   saveChange ( obj ) {
-    console.log(obj);
     this.crudService.saveChanges('sobre/' + obj.cod_sobre, obj);
     this.getData(), delay(1000);
   }

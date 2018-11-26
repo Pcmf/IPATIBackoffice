@@ -51,15 +51,18 @@ export class ManuaisComponent {
   }
 
   guardarNovoManual (nome) {
-    this.crudService.create('man', nome );
-    this.cancelar();
-    this.getData(), delay(1000);
+    this.crudService.create('man', nome ).subscribe( resp => {
+      this.cancelar();
+      this.getData();
+    });
   }
 
   deleteManual (m) {
-    if  (confirm('Atenção!!\nVai remover este manual e todos os titulos associados!\nPretende continuar?')){
-      this.crudService.delete('man/' + m.COD_MANUAL);
-      this.manuais.splice(this.manuais.indexOf(m), 1);
+    if  (confirm('Atenção!!\nVai remover este manual e todos os titulos associados!\nPretende continuar?')) {
+      this.crudService.delete('man/' + m.COD_MANUAL).subscribe( resp => {
+        this.manual = '';
+        this.getData();
+      });
     }
   }
 
@@ -69,9 +72,9 @@ export class ManuaisComponent {
   }
 
   saveTitulo (f) {
-    console.log(f);
-    this.crudService.saveChanges('man/' + f.cod_manual + '/' + f.seq, f);
-    this.showTitulos({'COD_MANUAL': f.cod_manual, 'NOME': this.manual});
+    this.crudService.saveChanges('man/' + f.cod_manual + '/' + f.seq, f).subscribe( resp => {
+      this.showTitulos({'COD_MANUAL': f.cod_manual, 'NOME': this.manual});
+    });
   }
 
   newTitulo () {
@@ -80,7 +83,8 @@ export class ManuaisComponent {
   }
 
   deleteTitulo (t) {
-    this.crudService.delete('man/' + t.COD_MANUAL + '/' + t.SEQ);
-    this.titulos.splice(this.titulos.indexOf(t), 1);
+    this.crudService.delete('man/' + t.COD_MANUAL + '/' + t.SEQ).subscribe( resp => {
+      this.showTitulos({'COD_MANUAL': t.COD_MANUAL, 'NOME': this.manual});
+    });
   }
 }
