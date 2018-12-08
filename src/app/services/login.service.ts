@@ -46,8 +46,12 @@ export class LoginService {
       }
   }
 
+  /**
+   *
+   * @param credenciais
+   */
   changePassDB (credenciais) {
-     return this.http.post('http://localhost/ipatimupRest/change',
+     return this.http.put('http://localhost/ipatimupRest/change',
         JSON.stringify(credenciais))
         .pipe(
           map(response => {

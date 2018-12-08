@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ChangepassComponent implements OnInit {
   private invalid2Pass = false;
   private erro = false;
-  private u = {};
+  private u: any = {};
   private newData: any;
   constructor(private loginService: LoginService, private router: Router) {
     this.loginService.getUserData().subscribe(resp => {
@@ -23,19 +23,21 @@ export class ChangepassComponent implements OnInit {
   ngOnInit() {
   }
 
-changePass(form) {
+  changePass(form) {
   if (form.pass1 === form.pass2) {
     this.invalid2Pass = false;
     // console.log(form.pass2);
-    this.newData = {newpass: form.pass1, token: localStorage.getItem('token')};
-    this.loginService.changePassDB (this.newData);
-    // console.log(chg);
-    /* if (this.loginService.changePassDB(form.pass1)) {
-      localStorage.removeItem('token');
-      this.router.navigate(['/login']);
-    } else {
-      this.erro = true;
-    } */
+    this.newData = {'newnome': form.nome, 'newusername': form.username, 'newpass': form.pass1, 'token': sessionStorage.getItem('token')};
+   // this.loginService.changePassDB (this.newData);
+
+    this.loginService.changePassDB(this.newData).subscribe(
+      resp => {
+        console.log(resp);
+        sessionStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      }
+    );
+
 
   } else {
     this.invalid2Pass = true;
